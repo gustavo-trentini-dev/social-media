@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media - Login</title>
+
+  <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+</head>
+<body>
+  <div class="container-login">
+    <div>
+      <form class="login-form" id="login">
+        <span>Welcome to Social Media!</span>
+        <div>
+          <input id="email" name="email" type="text" placeholder="E-mail" required="required"/>
+        </div>
+        <div>
+          <input id="password" name="password" type="password" placeholder="Password" required="required"/>
+        </div>
+        <a href="/create-user">Sign Up</a>
+        <button type="submit" class="login-button">Login</button>
+      </form>
+    </div>
+  </div>  
+  {{ template "scripts" }}
+  <script src="/assets/js/login.js"></script>
+</body>
+</html>

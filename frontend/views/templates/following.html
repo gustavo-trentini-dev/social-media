@@ -1,0 +1,19 @@
+{{ define "modal-following"}}
+  <div id="modal-following" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Following</h2>
+        </div>
+        <div class="modal-body">
+          {{ range .Following }}
+            <a href="users/{{ .ID }}">{{ .Nick }}</a>
+            <br/>
+          {{ else }}
+            <p class="text-secondary text-center">Follows nobody</p>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

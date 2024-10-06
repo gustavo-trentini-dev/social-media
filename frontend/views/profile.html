@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialMedia - My Profile</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+  {{ template "header" }}
+    
+  <div class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">My Profile</h5>
+            <h6 class="card-subtitle mb-2 text-secondary">
+              {{ .Name }} - {{ .Nick }} - Member Since: {{ .CreatedAt.Format "02/01/2006" }}
+            </h6>
+
+            <p class="card-text">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-followers">
+                Followers: {{ len .Followers }}
+              </a>
+            </p>
+
+            <p class="card-text">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-following">
+                Following: {{ len .Following }}
+              </a>
+            </p>  
+            
+            <div class="row">
+              <div class="col-12">
+                <a href="/edit-user" class="btn btn-primary card-link">Edit</a>
+
+                <a href="/update-password" class="btn btn-primary card-link">Update Password</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">My Posts</h5>
+            <p class="card-text">
+              {{ range .Posts }}
+                {{ template "my-posts" . }}
+              {{ else }}
+                <p class="text-secondary text-center">
+                  None posts
+                </p>
+              {{ end }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <a id="delete-user" class="btn btn-info card-link">
+    Delete your account
+  </a>
+  
+  {{ template "modal-followers" . }}
+  {{ template "modal-following" . }}
+  {{ template "footer" }}
+  {{ template "scripts" }}
+
+  <script src="/assets/js/post.js"></script>
+  <script src="/assets/js/user.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialMedia - Update - {{ .Title }}</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+
+  {{ template "header" }}
+
+  <div class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-12">
+        <h3>Update Post</h3>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title" placeholder="Write the title of your post" value="{{ .Title }}" />
+        </div>
+        <div class="form-group">
+          <label for="content"> Content</label>
+          <textarea class="form-control" id="content" name="content" placeholder="Write the content of your post">{{ .Content }}</textarea>
+        </div>
+        <button id="update-post" class="btn btn-primary" data-post-id="{{ .ID }}" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  {{ template "footer" }}
+  {{ template "scripts" }}
+  <script src="/assets/js/post.js"></script>
+</body>
+</html>

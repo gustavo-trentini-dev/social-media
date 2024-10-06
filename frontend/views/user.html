@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialMedia - {{ .User.Name }}</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+  {{ template "header" }}
+
+  {{ $followedForLoggedUser := false }}
+  {{ range .User.Followers }}
+    {{ if (eq .ID $.UserLoggedId )}}
+      {{ $followedForLoggedUser = true }}
+    {{ end }}
+  {{ end }}
+    
+  <div class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">User Profile</h5>
+            <h6 class="card-subtitle mb-2 text-secondary">
+              {{ .User.Name }} - {{ .User.Nick }} - Member Since: {{ .User.CreatedAt.Format "02/01/2006" }}
+            </h6>
+
+            <p class="card-text">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-followers">
+                Followers: {{ len .User.Followers }}
+              </a>
+            </p>
+
+            <p class="card-text">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-following">
+                Following: {{ len .User.Following }}
+              </a>
+            </p>
+
+            <div class="card-link">
+              {{ if $followedForLoggedUser }}
+                <button id="unfollow" class="btn btn-primary" data-user-id="{{ .User.ID }}">Unfollow</button>
+              {{ else }}
+                <button id="follow" class="btn btn-primary" data-user-id="{{ .User.ID }}">Follow</button>
+              {{ end }}
+            </div>                   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Posts of {{ .User.Nick }}</h5>
+            <p class="card-text">
+              {{ range .User.Posts }}
+                {{ template "other-posts" . }}
+              {{ else }}
+                <p class="text-secondary text-center">
+                  None posts
+                </p>
+              {{ end }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+  
+  {{ template "modal-followers" .User }}
+  {{ template "modal-following" .User }}
+  {{ template "footer" }}
+  {{ template "scripts" }}
+
+  <script src="/assets/js/post.js"></script>
+  <script src="/assets/js/user.js"></script>
+</body>
+</html>

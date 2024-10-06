@@ -1,0 +1,39 @@
+{{ define "likes" }}
+  <i class="fa-solid fa-heart like-post" style="cursor: pointer;"></i>
+  <span> {{ .Likes }} </span>
+{{ end }}
+
+{{ define "update" }}
+ <a href="/posts/{{ .ID }}/edit" style="text-decoration: none; cursor: pointer;">
+  <i class="fa-solid fa-pen-to-square"></i>
+ </a>
+{{ end }}
+
+{{ define "delete" }}
+  <i class="fa-solid fa-trash text-danger delete-post" style="cursor: pointer;"></i>
+{{ end }}
+
+{{ define "post-header" }}
+  <h1 class="display-4">{{ .Title }}</h1>
+  <p class="lead">{{ .Content }}</p>
+  <a href="/users/{{ .AuthorId }}">{{ .AuthorNick }} - {{ .CreatedAt.Format "02/01/2006" }}</a>
+  <hr class="my-4">
+{{ end }}
+
+{{ define "my-posts" }}
+  <div class="jumbotron bg-light p-2 mt-2 shadow-sm rounded" data-post-id="{{ .ID }}">
+    {{ template "post-header" . }}
+    <p>
+      {{ template "likes" . }}
+      {{ template "update" . }}
+      {{ template "delete" . }}
+    </p>
+  </div>
+{{ end }}
+
+{{ define "other-posts" }}
+  <div class="jumbotron bg-light p-2 mt-2 shadow-sm rounded" data-post-id="{{ .ID }}">
+    {{ template "post-header" . }}
+    <p>{{ template "likes" . }}</p>
+  </div>
+{{ end }}
